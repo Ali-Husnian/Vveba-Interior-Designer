@@ -1,6 +1,45 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
 
+const worksData = [
+ {
+  id: 1,
+  image: '/images/work1.jpg',
+  title: 'Interior Design',
+  headline: 'Giving your Home a new Style',
+  description:
+   'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas voluptate.',
+  direction: 'left',
+ },
+ {
+  id: 2,
+  image: '/images/work2.jpg',
+  title: 'Interior Design',
+  headline: 'Giving your Home a new Style',
+  description:
+   'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas voluptate.',
+  direction: 'right',
+ },
+ {
+  id: 3,
+  image: '/images/work3.jpg',
+  title: 'Interior Design',
+  headline: 'Giving your Home a new Style',
+  description:
+   'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas voluptate.',
+  direction: 'left',
+ },
+ {
+  id: 4,
+  image: '/images/work4.jpg',
+  title: 'Interior Design',
+  headline: 'Giving your Home a new Style',
+  description:
+   'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas voluptate.',
+  direction: 'right',
+ },
+];
+
 export default function Portfolio() {
  const sectionRef = useRef(null);
  const [change, setChange] = useState(false);
@@ -9,11 +48,7 @@ export default function Portfolio() {
   const onScroll = () => {
    if (sectionRef.current) {
     const top = sectionRef.current.offsetTop;
-    if (window.scrollY >= top) {
-     setChange(true);
-    } else {
-     setChange(false);
-    }
+    setChange(window.scrollY >= top);
    }
   };
 
@@ -28,58 +63,18 @@ export default function Portfolio() {
     <h1>Checkout My Work</h1>
    </div>
    <div className="works">
-    <div className="work work-left">
-     <img src="/images/work1.jpg" />
-     <div className="work-info">
-      <h3>Interior Design</h3>
-      <h1>Giving your Home a new Style</h1>
-      <p>
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
-       blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas
-       voluptate.
-      </p>
-      <a href="#">View Project</a>
+    {worksData.map((work, index) => (
+     <div key={work.id} className={`work work-${work.direction}`}>
+      {work.direction === 'left' && <img src={work.image} alt={work.title} />}
+      <div className="work-info">
+       <h3>{work.title}</h3>
+       <h1>{work.headline}</h1>
+       <p>{work.description}</p>
+       <a href="#">View Project</a>
+      </div>
+      {work.direction === 'right' && <img src={work.image} alt={work.title} />}
      </div>
-    </div>
-    <div className="work work-right">
-     <div className="work-info">
-      <h3>Interior Design</h3>
-      <h1>Giving your Home a new Style</h1>
-      <p>
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
-       blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas
-       voluptate.
-      </p>
-      <a href="#">View Project</a>
-     </div>
-     <img src="/images/work2.jpg" />
-    </div>
-    <div className="work work-left">
-     <img src="/images/work3.jpg" />
-     <div className="work-info">
-      <h3>Interior Design</h3>
-      <h1>Giving your Home a new Style</h1>
-      <p>
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
-       blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas
-       voluptate.
-      </p>
-      <a href="#">View Project</a>
-     </div>
-    </div>
-    <div className="work work-right">
-     <div className="work-info">
-      <h3>Interior Design</h3>
-      <h1>Giving your Home a new Style</h1>
-      <p>
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
-       blanditiis dolorem iste quam quibusdam et nostrum quod possimus voluptas
-       voluptate.
-      </p>
-      <a href="#">View Project</a>
-     </div>
-     <img src="/images/work4.jpg" />
-    </div>
+    ))}
    </div>
   </section>
  );
