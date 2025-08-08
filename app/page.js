@@ -9,7 +9,7 @@ import Achievments from '@/components/achievments';
 import Footer from '@/components/footer';
 
 export default function Home() {
-
+ // we are now call the all components inside the main container
  return (
   <div className="container">
    <Navbar />
